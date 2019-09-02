@@ -29,7 +29,7 @@ class SoundTest extends TestCase
         $sound->lang = 'En';
         $sound->translation = $translation;
         $sound->translation_accepted = false;
-        $sound->group_name = false;
+        $sound->group_name = 'group1';
         $sound->file_name = '0.wav';
         $sound->is_speech = true;
         $sound->gender = 'm';
@@ -52,5 +52,38 @@ class SoundTest extends TestCase
         $this->assertEquals($translation, $json['data'][0]['translation']);
         $this->assertEquals(false, $json['data'][0]['recorded']);
         $this->assertEquals(false, $json['data'][0]['translation_accepted']);
+    }
+
+    public function testGetGroups()
+    {
+        $names = [];
+        for ($i = 0; $i < 3; $i++) {
+            $orig = $this->faker->text(15);
+            $translation = $this->faker->text(15);
+            $groupName = $this->faker->text(15);
+
+            $sound = new Sound();
+            $sound->game_id = 1;
+            $sound->original_text = $orig;
+            $sound->behavior = 'something';
+            $sound->lang = 'En';
+            $sound->translation = $translation;
+            $sound->translation_accepted = false;
+            $sound->group_name = $groupName;
+            $sound->file_name = '0.wav';
+            $sound->is_speech = true;
+            $sound->gender = 'm';
+            $sound->recorded = false;
+            $sound->save();
+
+            $names[] = $groupName;
+        }
+
+        $response = $this->get('/api/sound/groups');
+        $response->assertStatus(200);
+
+        $json = $response->json();
+        $this->assertEquals(sort($json), sort($names));
+
     }
 }

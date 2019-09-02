@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IconsProviderModule } from './icons-provider.module';
 import { NgZorroAntdModule, NZ_I18N, ru_RU } from 'ng-zorro-antd';
@@ -10,26 +9,35 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
 import ru from '@angular/common/locales/ru';
+import {ResourceModule} from '@ngx-resource/handler-ngx-http';
 import {SoundsComponent} from './pages/sounds/sounds.component';
 import {GroupsComponent} from './pages/groups/groups.component';
 import {StatsComponent} from './pages/stats/stats.component';
+import {RouterModule} from '@angular/router';
+import {routes} from './app-routing.module';
 
 registerLocaleData(ru);
 
 @NgModule({
   declarations: [
     AppComponent,
+    SoundsComponent,
+    GroupsComponent,
+    StatsComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     IconsProviderModule,
     NgZorroAntdModule,
+    RouterModule.forRoot(routes),
     FormsModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ResourceModule.forRoot(),
   ],
-  providers: [{ provide: NZ_I18N, useValue: ru_RU }],
+  providers: [
+    {provide: NZ_I18N, useValue: ru_RU},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

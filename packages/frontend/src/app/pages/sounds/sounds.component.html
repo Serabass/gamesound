@@ -1,1 +1,63 @@
-<p>sounds works!</p>
+<nz-row>
+  <nz-col [nzMd]="8">
+    <nz-select nzMode="multiple"
+               [nzMaxTagCount]="2"
+               style="width: 100%;"
+               nzPlaceHolder="Group"
+               [(ngModel)]="filter.groups">
+      <nz-option *ngFor="let option of groups" [nzLabel]="option" [nzValue]="option"></nz-option>
+    </nz-select>
+  </nz-col>
+  <nz-col [nzMd]="4">
+    <label nz-checkbox [(ngModel)]="filter.onlySpeech">
+      Only speech
+    </label>
+  </nz-col>
+</nz-row>
+
+<nz-row>
+  <nz-col>
+    <nz-table #basicTable
+              [nzLoading]="loading"
+              [nzFrontPagination]="false"
+              [nzData]="sounds?.data"
+              nzPaginationPosition="both"
+              [nzShowPagination]="true"
+              [nzPageSize]="15"
+              [(nzPageIndex)]="page"
+              [(nzPageSize)]="pageSize"
+              (nzPageIndexChange)="load($event)"
+              (nzPageSizeChange)="load($event)"
+              [nzTotal]="total">
+      <thead>
+      <tr>
+        <th>Original Text</th>
+        <th>Behavior</th>
+        <th>Lang</th>
+        <th>Translation</th>
+        <th>Translation Accepted</th>
+        <th>Group Name</th>
+        <th>Is speech</th>
+        <th>Gender</th>
+        <th>Save</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td>{{data.original_text}}</td>
+        <td>{{data.behavior}}</td>
+        <td>{{data.lang}}</td>
+        <td>{{data.translation}}</td>
+        <td>{{data.translation_accepted}}</td>
+        <td>{{data.group_name}}</td>
+        <td>{{data.is_speech}}</td>
+        <td>{{data.gender}}</td>
+        <td>
+          <a nz-button nzType="primary">Save</a>
+        </td>
+      </tr>
+      </tbody>
+    </nz-table>
+
+  </nz-col>
+</nz-row>
