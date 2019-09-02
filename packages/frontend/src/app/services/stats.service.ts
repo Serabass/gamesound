@@ -2,7 +2,9 @@ import {Injectable} from '@angular/core';
 import {
   IResourceMethod,
   Resource,
-  ResourceAction, ResourceHandler, ResourceParams,
+  ResourceAction,
+  ResourceHandler,
+  ResourceParams,
   ResourceRequestMethod
 } from '@ngx-resource/core';
 
@@ -11,23 +13,16 @@ import {
 })
 @ResourceParams({
   // IResourceParams
-  pathPrefix: '/api/sound'
+  pathPrefix: '/api/stats'
 })
-export class SoundService extends Resource {
+export class StatsService extends Resource {
   constructor(handler: ResourceHandler) {
     super(handler);
   }
 
   @ResourceAction({
-    path: '/',
+    path: '/all',
     method: ResourceRequestMethod.Get
   })
-  public paginate: IResourceMethod<{ page?: number }, any>;
-
-  @ResourceAction({
-    path: '/groups',
-    method: ResourceRequestMethod.Get
-  })
-  public getGroups: IResourceMethod<any, any>;
-
+  public all: IResourceMethod<void, any>;
 }

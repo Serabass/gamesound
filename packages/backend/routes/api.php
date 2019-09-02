@@ -19,3 +19,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('/sound', 'Api\\SoundController@paginate');
 Route::get('/sound/groups', 'Api\\SoundController@groups');
+Route::get('/stats/all', 'Api\\StatController@all');
