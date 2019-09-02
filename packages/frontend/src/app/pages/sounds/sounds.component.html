@@ -1,5 +1,8 @@
 <nz-row>
-  <nz-col [nzMd]="8">
+  <nz-col [nzMd]="4">
+    <input nz-input type="text" [(ngModel)]="filter.text" placeholder="Filter by text"/>
+  </nz-col>
+  <nz-col [nzMd]="8" [nzOffset]="1">
     <nz-select nzMode="multiple"
                [nzMaxTagCount]="2"
                style="width: 100%;"
@@ -8,10 +11,20 @@
       <nz-option *ngFor="let option of groups" [nzLabel]="option" [nzValue]="option"></nz-option>
     </nz-select>
   </nz-col>
-  <nz-col [nzMd]="4">
+  <nz-col [nzMd]="2" [nzOffset]="1">
     <label nz-checkbox [(ngModel)]="filter.onlySpeech">
       Only speech
     </label>
+  </nz-col>
+  <nz-col [nzMd]="2">
+    <label nz-checkbox [(ngModel)]="filter.onlyEmpty">
+      Only empty
+    </label>
+  </nz-col>
+  <nz-col [nzMd]="4">
+    <button nz-button (click)="load(1)">
+      Search
+    </button>
   </nz-col>
 </nz-row>
 
@@ -26,6 +39,7 @@
               [nzPageSize]="15"
               [(nzPageIndex)]="page"
               [(nzPageSize)]="pageSize"
+              [nzShowTotal]="totalTemplate"
               (nzPageIndexChange)="load($event)"
               (nzPageSizeChange)="load($event)"
               [nzTotal]="total">
@@ -43,8 +57,10 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let sound of basicTable.data" (click)="play(sound)" [class.playing]="sound.playing">
-        <td>{{sound.original_text}}</td>
+      <tr *ngFor="let sound of basicTable.data" (click)="play(sound, $event)" [class.playing]="sound.playing">
+        <td>
+          <textarea nz-input [(ngModel)]="sound.original_text"></textarea>
+        </td>
         <td>{{sound.behavior}}</td>
         <td>{{sound.lang}}</td>
         <td>{{sound.translation}}</td>
@@ -63,3 +79,7 @@
 </nz-row>
 
 <audio #audio></audio>
+
+<ng-template #totalTemplate let-total>
+  Total: {{ total }}
+</ng-template>

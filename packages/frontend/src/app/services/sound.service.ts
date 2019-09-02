@@ -20,9 +20,9 @@ export class SoundService extends Resource {
 
   @ResourceAction({
     path: '/',
-    method: ResourceRequestMethod.Get
+    method: ResourceRequestMethod.Post
   })
-  public paginate: IResourceMethod<{ page?: number }, any>;
+  public paginate: IResourceMethod<{ page?: number, filters: any }, any>;
 
   @ResourceAction({
     path: '/groups',

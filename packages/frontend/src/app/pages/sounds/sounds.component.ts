@@ -23,7 +23,9 @@ export class SoundsComponent implements OnInit {
 
   public filter = {
     groups: [],
-    onlySpeech: true
+    onlySpeech: true,
+    onlyEmpty: false,
+    text: '',
   };
 
   public groups: string[];
@@ -41,19 +43,27 @@ export class SoundsComponent implements OnInit {
   }
 
   public async load(page: number = this.page) {
-    this.page = page;
     this.loading = true;
-    this.sounds = await this.sound.paginate({page: this.page});
+    this.sounds = await this.sound.paginate({
+      page: this.page,
+      filters: this.filter
+    });
     this.loading = false;
 
     this.total = this.sounds.total;
+    this.page = page;
   }
 
-  public async play(sound) {
+  public async play(sound, event) {
+
+    if (event.target.tagName === 'TEXTAREA') {
+      return;
+    }
+
     let file = this.getUrl(sound.file_name);
 
-    for (let sound of this.sounds.data) {
-      sound.playing = false;
+    for (let soundObj of this.sounds.data) {
+      soundObj.playing = false;
     }
 
     sound.playing = true;

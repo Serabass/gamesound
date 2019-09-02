@@ -24,5 +24,6 @@ export class StatsService extends Resource {
     path: '/all',
     method: ResourceRequestMethod.Get
   })
-  public all: IResourceMethod<void, any>;
+  public all: IResourceMethod<any, any>;
+
 }

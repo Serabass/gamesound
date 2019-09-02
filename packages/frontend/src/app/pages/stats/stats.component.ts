@@ -12,13 +12,12 @@ export class StatsComponent implements OnInit {
 
   public data: any;
 
-  constructor(public stats: StatsService) {
+  constructor(public s: StatsService) {
   }
 
   async ngOnInit() {
     this.loading = true;
-    this.data = await this.stats.all();
+    this.data = await this.s.all();
     this.loading = false;
   }
-
 }

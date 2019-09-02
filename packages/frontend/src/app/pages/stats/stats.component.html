@@ -1,1 +1,29 @@
 <nz-progress [nzPercent]="75" nzType="circle"></nz-progress>
+
+<nz-row>
+  <nz-col [nzMd]="6">
+    <ng-template #byLangTableTitle><h2>By lang</h2></ng-template>
+    <nz-table *ngIf="data"
+              [nzBordered]="true"
+              [nzTitle]="byLangTableTitle"
+              [nzData]="[1]"
+              [nzShowPagination]="false">
+      <tbody>
+      <tr>
+        <td> En</td>
+        <td>{{ data.lang.En }}</td>
+      </tr>
+      <tr>
+        <td> Es</td>
+        <td>{{ data.lang.Es }}</td>
+      </tr>
+      <tr>
+        <td> Jp</td>
+        <td>{{ data.lang.Jp }}</td>
+      </tr>
+      </tbody>
+    </nz-table>
+  </nz-col>
+</nz-row>
+
+{{ data | json }}
