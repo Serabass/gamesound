@@ -10,12 +10,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
 import ru from '@angular/common/locales/ru';
+import {SoundsComponent} from './pages/sounds/sounds.component';
+import {GroupsComponent} from './pages/groups/groups.component';
+import {StatsComponent} from './pages/stats/stats.component';
 
 registerLocaleData(ru);
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
