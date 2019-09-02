@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {SoundService} from '../../services/sound.service';
 
 export interface Sound {
@@ -28,6 +28,9 @@ export class SoundsComponent implements OnInit {
 
   public groups: string[];
 
+  @ViewChild('audio', {static: true})
+  public audio: ElementRef<HTMLAudioElement>;
+
   constructor(public sound: SoundService) {
   }
 
@@ -44,6 +47,16 @@ export class SoundsComponent implements OnInit {
     this.loading = false;
 
     this.total = this.sounds.total;
-    debugger;
+  }
+
+  public async play(fileName: string) {
+    let file = this.getUrl(fileName);
+
+    this.audio.nativeElement.src = file;
+    await this.audio.nativeElement.play();
+  }
+
+  public getUrl(fileName: string) {
+    return `http://gamesound.serabass.net/sounds/1/${fileName}`;
   }
 }

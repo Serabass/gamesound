@@ -8,10 +8,17 @@ import {StatsService} from '../../services/stats.service';
 })
 export class StatsComponent implements OnInit {
 
+  public loading = false;
+
+  public data: any;
+
   constructor(public stats: StatsService) {
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.loading = true;
+    this.data = await this.stats.all();
+    this.loading = false;
   }
 
 }

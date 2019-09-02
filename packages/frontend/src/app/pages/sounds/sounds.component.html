@@ -17,7 +17,7 @@
 
 <nz-row>
   <nz-col>
-    <nz-table #basicTable
+    <nz-table #basicTable class="sounds-table"
               [nzLoading]="loading"
               [nzFrontPagination]="false"
               [nzData]="sounds?.data"
@@ -43,7 +43,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let data of basicTable.data">
+      <tr *ngFor="let data of basicTable.data" (click)="play(data.file_name)">
         <td>{{data.original_text}}</td>
         <td>{{data.behavior}}</td>
         <td>{{data.lang}}</td>
@@ -61,3 +61,5 @@
 
   </nz-col>
 </nz-row>
+
+<audio #audio></audio>
