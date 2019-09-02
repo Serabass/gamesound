@@ -43,15 +43,15 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let data of basicTable.data" (click)="play(data.file_name)">
-        <td>{{data.original_text}}</td>
-        <td>{{data.behavior}}</td>
-        <td>{{data.lang}}</td>
-        <td>{{data.translation}}</td>
-        <td>{{data.translation_accepted}}</td>
-        <td>{{data.group_name}}</td>
-        <td>{{data.is_speech}}</td>
-        <td>{{data.gender}}</td>
+      <tr *ngFor="let sound of basicTable.data" (click)="play(sound)" [class.playing]="sound.playing">
+        <td>{{sound.original_text}}</td>
+        <td>{{sound.behavior}}</td>
+        <td>{{sound.lang}}</td>
+        <td>{{sound.translation}}</td>
+        <td>{{sound.translation_accepted}}</td>
+        <td>{{sound.group_name}}</td>
+        <td>{{sound.is_speech}}</td>
+        <td>{{sound.gender}}</td>
         <td>
           <a nz-button nzType="primary">Save</a>
         </td>

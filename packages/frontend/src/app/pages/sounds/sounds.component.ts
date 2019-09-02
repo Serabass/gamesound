@@ -49,11 +49,19 @@ export class SoundsComponent implements OnInit {
     this.total = this.sounds.total;
   }
 
-  public async play(fileName: string) {
-    let file = this.getUrl(fileName);
+  public async play(sound) {
+    let file = this.getUrl(sound.file_name);
 
+    for (let sound of this.sounds.data) {
+      sound.playing = false;
+    }
+
+    sound.playing = true;
     this.audio.nativeElement.src = file;
-    await this.audio.nativeElement.play();
+    this.audio.nativeElement.onended = () => {
+      sound.playing = false;
+    };
+    this.audio.nativeElement.play();
   }
 
   public getUrl(fileName: string) {
