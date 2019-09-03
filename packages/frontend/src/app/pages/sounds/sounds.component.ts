@@ -27,6 +27,7 @@ export class SoundsComponent implements OnInit {
     groups: [],
     onlySpeech: true,
     onlyEmpty: false,
+    onlyDoubtful: false,
     text: '',
   };
 

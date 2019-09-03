@@ -13,6 +13,7 @@ class SoundController extends Controller
     {
         $onlySpeech = Input::get('filters.onlySpeech', true);
         $onlyEmpty = Input::get('filters.onlyEmpty', false);
+        $onlyDoubtful = Input::get('filters.onlyDoubtful', false);
 
 
         $groups = Input::get('filters.groups');
@@ -21,6 +22,14 @@ class SoundController extends Controller
 
         if ($onlyEmpty) {
             $query->where('original_text', '=', '');
+        }
+
+        if ($onlySpeech) {
+            $query->where('is_speech', '=', '1');
+        }
+
+        if ($onlyDoubtful) {
+            $query->where('original_text', 'LIKE', '%(%');
         }
 
         if ($onlySpeech) {

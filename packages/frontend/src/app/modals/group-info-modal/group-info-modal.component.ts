@@ -7,7 +7,7 @@ import {Component, OnInit} from '@angular/core';
 })
 export class GroupInfoModalComponent implements OnInit {
 
-  private rgx = /^\s*(\d+)\s+(\w+),/;
+  private rgx = /^\s*(\d+)\s+(\w+)/;
 
   public group: any;
 
@@ -18,7 +18,9 @@ export class GroupInfoModalComponent implements OnInit {
   }
 
   public get isPedGroup() {
-    return this.rgx.test(this.group.title);
+    let parts = this.group.title.split(/\s*,\s*/);
+
+    return parts[0].split(/s*\/\s*/).some((e) => this.rgx.test(e));
   }
 
   public get imageUrl() {

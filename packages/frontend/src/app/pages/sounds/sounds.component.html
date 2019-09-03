@@ -16,12 +16,13 @@
   </nz-col>
   <nz-col [nzMd]="2" [nzOffset]="1">
     <label nz-checkbox [(ngModel)]="filter.onlySpeech">
-      Only speech
+      Speech
     </label>
-  </nz-col>
-  <nz-col [nzMd]="2">
     <label nz-checkbox [(ngModel)]="filter.onlyEmpty">
-      Only empty
+      Empty
+    </label>
+    <label nz-checkbox [(ngModel)]="filter.onlyDoubtful">
+      Doubtful
     </label>
   </nz-col>
   <nz-col [nzMd]="4">
@@ -67,13 +68,13 @@
         <td>{{sound.behavior}}</td>
         <td>{{sound.lang}}</td>
         <td>{{sound.translation}}</td>
-        <td>{{sound.translation_accepted}}</td>
+        <td>{{sound.translation_accepted ? 'Yes' : 'No'}}</td>
         <td>
           <a (click)="showGroupInfo(sound.group, $event)">
             {{sound.group?.title}}
           </a>
         </td>
-        <td>{{sound.is_speech}}</td>
+        <td>{{sound.is_speech ? 'Yes' : 'No'}}</td>
         <td>{{sound.gender}}</td>
         <td>
           <a nz-button nzType="primary">Save</a>

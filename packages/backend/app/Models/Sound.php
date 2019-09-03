@@ -45,6 +45,12 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Sound extends Model
 {
+    public $casts = [
+        'is_speech' => 'boolean',
+        'recorded' => 'boolean',
+        'translation_accepted' => 'boolean',
+    ];
+
     public function group()
     {
         return $this->belongsTo(Group::class);
