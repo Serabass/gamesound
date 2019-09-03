@@ -56,7 +56,7 @@
   <nz-col [nzMd]="4">
     <div class="icon-wrapper volume">
       <i nz-icon nzType="sound" nzTheme="outline"></i>
-      <nz-slider nzMax="1" nzMin="0" nzStep="0.01" [(ngModel)]="volume"></nz-slider>
+      <nz-slider nzMax="1" nzMin="0" nzStep="0.01" [(ngModel)]="volume" (ngModelChange)="saveVolume()"></nz-slider>
     </div>
   </nz-col>
 </nz-row>
@@ -73,8 +73,8 @@
               [(nzPageIndex)]="page"
               [(nzPageSize)]="pageSize"
               [nzShowTotal]="totalTemplate"
-              (nzPageIndexChange)="load($event)"
-              (nzPageSizeChange)="load($event)"
+              (nzPageIndexChange)="search(false)"
+              (nzPageSizeChange)="search()"
               [nzTotal]="total">
       <thead>
       <tr>

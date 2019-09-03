@@ -61,9 +61,15 @@ export class SoundsComponent implements OnInit {
       this.filter.onlyDoubtful = !!+params.only_doubtful;
       this.filter.onlyEmpty = !!+params.only_empty;
       this.filter.text = params.text;
+      this.page = params.page;
+      this.pageSize = params.page_size;
 
       await this.load();
     });
+
+    if (localStorage.getItem('volume')) {
+      this.volume = +localStorage.getItem('volume');
+    }
   }
 
   public async load(page: number = this.page) {
@@ -129,7 +135,10 @@ export class SoundsComponent implements OnInit {
     this.notification.info('Success!', `Suggestion [${sound.original_text}] successully sent!`);
   }
 
-  public search() {
+  public search(resetPage = true) {
+    if (resetPage) {
+      this.page = 1;
+    }
     this.router.navigate(['/sounds'], {
       queryParams: {
         only_speech: +this.filter.onlySpeech,
@@ -137,7 +146,13 @@ export class SoundsComponent implements OnInit {
         only_empty: +this.filter.onlyEmpty,
         text: this.filter.text,
         group_id: this.filter.groups.filter((i) => i !== 0).join(','),
+        page: this.page,
+        page_size: this.pageSize,
       }
     });
+  }
+
+  public saveVolume() {
+    localStorage.setItem('volume', this.volume.toString());
   }
 }
