@@ -1,6 +1,6 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {SoundService} from '../../services/sound.service';
-import {NzModalService} from 'ng-zorro-antd';
+import {NzModalService, NzNotificationService} from 'ng-zorro-antd';
 import {GroupInfoModalComponent} from '../../modals/group-info-modal/group-info-modal.component';
 import {CorrectionService} from '../../services/correction.service';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -33,6 +33,8 @@ export class SoundsComponent implements OnInit {
     text: '',
   };
 
+  public volume = 1.0;
+
   public groups: any[];
 
   @ViewChild('audio', {static: true})
@@ -42,7 +44,8 @@ export class SoundsComponent implements OnInit {
               public modal: NzModalService,
               public correction: CorrectionService,
               public route: ActivatedRoute,
-              public router: Router) {
+              public router: Router,
+              public notification: NzNotificationService) {
   }
 
   ngOnInit() {
@@ -122,6 +125,8 @@ export class SoundsComponent implements OnInit {
       sound,
     });
     sound.saving = false;
+
+    this.notification.info('Success!', `Suggestion [${sound.original_text}] successully sent!`);
   }
 
   public search() {

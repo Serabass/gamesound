@@ -21,7 +21,7 @@ export class CorrectionService extends Resource {
   }
 
   @ResourceAction({
-    path: '/add',
+    path: '/add/{id}',
     method: ResourceRequestMethod.Post
   })
   public add: IResourceMethod<any, any>;

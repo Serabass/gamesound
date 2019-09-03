@@ -1,10 +1,28 @@
 <nz-row>
   <nz-col [nzMd]="4">
-    <input nz-input type="text" [(ngModel)]="filter.text" placeholder="Filter by text"/>
+
+    <nz-input-group [nzAddOnAfter]="clearIcon">
+      <input nz-input
+             type="text"
+             [(ngModel)]="filter.text"
+             placeholder="Filter by text"
+
+      />
+    </nz-input-group>
+
+    <ng-template #clearIcon>
+      <i nz-icon
+         nzType="close-circle"
+         nzTheme="outline"
+         (click)="filter.text = ''"
+         style="cursor: pointer;"></i>
+    </ng-template>
+
   </nz-col>
   <nz-col [nzMd]="8" [nzOffset]="1">
     <nz-select nzMode="multiple"
                [nzMaxTagCount]="2"
+               [nzAllowClear]="true"
                style="width: 100%;"
                nzPlaceHolder="Group"
                [(ngModel)]="filter.groups">
@@ -30,15 +48,21 @@
       ></i>
     </label>
   </nz-col>
-  <nz-col [nzMd]="4">
+  <nz-col [nzMd]="2">
     <button nz-button (click)="search()">
       Search
     </button>
   </nz-col>
+  <nz-col [nzMd]="4">
+    <div class="icon-wrapper volume">
+      <i nz-icon nzType="sound" nzTheme="outline"></i>
+      <nz-slider nzMax="1" nzMin="0" nzStep="0.01" [(ngModel)]="volume"></nz-slider>
+    </div>
+  </nz-col>
 </nz-row>
 
 <nz-row>
-  <nz-col>
+  <nz-col [nzMd]="22">
     <nz-table #basicTable class="sounds-table"
               [nzLoading]="loading"
               [nzFrontPagination]="false"
@@ -63,7 +87,8 @@
         <th>Group Name</th>
         <th>Is speech</th>
         <th>Gender</th>
-        <th>Save</th>
+        <th></th>
+        <th></th>
       </tr>
       </thead>
       <tbody>
@@ -120,7 +145,7 @@
   </nz-col>
 </nz-row>
 
-<audio #audio></audio>
+<audio #audio [volume]="volume"></audio>
 
 <ng-template #totalTemplate let-total>
   Total: {{ total }}
