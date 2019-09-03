@@ -1,4 +1,4 @@
-<nz-table [nzData]="data" #dataTable>
+<nz-table [nzData]="data" #dataTable [nzShowTotal]="totalTemplate">
   <thead>
   <tr>
     <th>#</th>
@@ -20,3 +20,7 @@
   </tr>
   </tbody>
 </nz-table>
+
+<ng-template #totalTemplate let-total>
+  Total: <b>{{ total }}</b>
+</ng-template>

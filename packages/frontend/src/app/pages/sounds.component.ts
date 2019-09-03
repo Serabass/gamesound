@@ -1,8 +1,8 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {SoundService} from '../../services/sound.service';
+import {SoundService} from '../services/sound.service';
 import {NzModalService, NzNotificationService} from 'ng-zorro-antd';
-import {GroupInfoModalComponent} from '../../modals/group-info-modal/group-info-modal.component';
-import {CorrectionService} from '../../services/correction.service';
+import {GroupInfoModalComponent} from '../modals/group-info-modal/group-info-modal.component';
+import {CorrectionService} from '../services/correction.service';
 import {ActivatedRoute, Router} from '@angular/router';
 
 export interface Sound {

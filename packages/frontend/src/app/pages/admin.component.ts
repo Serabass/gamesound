@@ -1,5 +1,5 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {CorrectionService} from '../../services/correction.service';
+import {CorrectionService} from '../services/correction.service';
 
 @Component({
   selector: 'app-admin',

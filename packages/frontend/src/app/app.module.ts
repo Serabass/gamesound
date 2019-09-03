@@ -10,13 +10,13 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {registerLocaleData} from '@angular/common';
 import ru from '@angular/common/locales/ru';
 import {ResourceModule} from '@ngx-resource/handler-ngx-http';
-import {SoundsComponent} from './pages/sounds/sounds.component';
-import {GroupsComponent} from './pages/groups/groups.component';
-import {StatsComponent} from './pages/stats/stats.component';
+import {SoundsComponent} from './pages/sounds.component';
+import {GroupsComponent} from './pages/groups.component';
+import {StatsComponent} from './pages/stats.component';
 import {RouterModule} from '@angular/router';
 import {routes} from './app-routing.module';
 import {GroupInfoModalComponent} from './modals/group-info-modal/group-info-modal.component';
-import {AdminComponent} from './pages/admin/admin.component';
+import {AdminComponent} from './pages/admin.component';
 
 registerLocaleData(ru);
 
