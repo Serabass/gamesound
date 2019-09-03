@@ -17,24 +17,29 @@
             [(nzCollapsed)]="isCollapsed"
             [nzTrigger]="null">
     <div class="sidebar-logo">
-      <a href="https://ng.ant.design/" target="_blank">
+      <a routerLink="/">
         <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
         <h1>Gamesound</h1>
       </a>
     </div>
     <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-      <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
-        <ul>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/sounds">Sounds</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/groups">Groups</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/stats">Stats</a>
-          </li>
-        </ul>
+      <li nz-menu-item nzMatchRouter routerLinkActive="ant-menu-item-selected">
+        <a routerLink="/sounds">
+          <i nz-icon nzType="sound" nzTheme="outline"></i>
+          Sounds
+        </a>
+      </li>
+      <li nz-menu-item nzMatchRouter routerLinkActive="ant-menu-item-selected">
+        <a routerLink="/groups">
+          <i nz-icon nzType="unordered-list" nzTheme="outline"></i>
+          Groups
+        </a>
+      </li>
+      <li nz-menu-item nzMatchRouter routerLinkActive="ant-menu-item-selected">
+        <a routerLink="/stats">
+          <i nz-icon nzType="bar-chart" nzTheme="outline"></i>
+          Stats
+        </a>
       </li>
     </ul>
   </nz-sider>
