@@ -1,1 +1,22 @@
-<p>groups works!</p>
+<nz-table [nzData]="data" #dataTable>
+  <thead>
+  <tr>
+    <th>#</th>
+    <th nzCustomFilter>
+      Name
+    </th>
+    <th>Sounds</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of dataTable.data">
+    <td>{{ data.id }}</td>
+    <td>
+      <a [routerLink]="['/sounds']" [queryParams]="{ group_id: data.id }">
+        {{ data.title }}
+      </a>
+    </td>
+    <td>{{ data.sounds_count }}</td>
+  </tr>
+  </tbody>
+</nz-table>

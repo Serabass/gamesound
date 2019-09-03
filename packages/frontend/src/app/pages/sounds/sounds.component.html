@@ -23,10 +23,15 @@
     </label>
     <label nz-checkbox [(ngModel)]="filter.onlyDoubtful">
       Doubtful
+      <i nz-icon nzType="question-circle" nzTheme="outline"
+         nz-popover
+         nzPlacement="bottom"
+         nzContent="Doubtful rows are the rows that contains '('"
+      ></i>
     </label>
   </nz-col>
   <nz-col [nzMd]="4">
-    <button nz-button (click)="load(1)">
+    <button nz-button (click)="search()">
       Search
     </button>
   </nz-col>
@@ -62,7 +67,9 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let sound of basicTable.data" (click)="play(sound, $event)" [class.playing]="sound.playing">
+      <tr *ngFor="let sound of basicTable.data"
+          (click)="play(sound, $event)"
+          [class.playing]="sound.playing">
         <td>
           {{ sound.id}}
         </td>
@@ -86,6 +93,25 @@
               Suggest
             </a>
           </nz-spin>
+        </td>
+        <td>
+          <button nz-button nz-popover
+                  [nzContent]="contentTemplate"
+                  nzPlacement="left">
+            <i nz-icon nzType="down-circle" nzTheme="outline"></i>
+          </button>
+          <ng-template #contentTemplate>
+            <nz-list
+              [nzDataSource]="sound.comments"
+              nzBordered
+              nzSize="large"
+              [nzRenderItem]="item"
+            >
+              <ng-template #item let-item>
+                <nz-list-item [nzContent]="item.contents"></nz-list-item>
+              </ng-template>
+            </nz-list>
+          </ng-template>
         </td>
       </tr>
       </tbody>

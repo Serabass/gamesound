@@ -42,7 +42,9 @@ class SoundController extends Controller
             $query->whereIn('group_id', $groups);
         }
 
-        $query->with('group');
+        $query
+            ->with('group')
+            ->with('comments');
 
         $paginate = $query->paginate();
         return [

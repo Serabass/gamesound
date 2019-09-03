@@ -57,4 +57,9 @@ class Sound extends Model
     {
         return $this->belongsTo(Group::class);
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'sound_id');
+    }
 }

@@ -24,3 +24,5 @@ Route::get('/correction', 'Api\\CorrectionController@paginate');
 Route::post('/correction/add/{id}', 'Api\\CorrectionController@add');
 Route::post('/correction/accept/{id}', 'Api\\CorrectionController@accept');
 Route::post('/correction/decline/{id}', 'Api\\CorrectionController@decline');
+
+Route::get('/group', 'Api\\GroupController@all');

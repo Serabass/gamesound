@@ -3,6 +3,7 @@ import {SoundService} from '../../services/sound.service';
 import {NzModalService} from 'ng-zorro-antd';
 import {GroupInfoModalComponent} from '../../modals/group-info-modal/group-info-modal.component';
 import {CorrectionService} from '../../services/correction.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 export interface Sound {
   id: number;
@@ -39,13 +40,27 @@ export class SoundsComponent implements OnInit {
 
   constructor(public sound: SoundService,
               public modal: NzModalService,
-              public correction: CorrectionService) {
+              public correction: CorrectionService,
+              public route: ActivatedRoute,
+              public router: Router) {
   }
 
-  async ngOnInit() {
-    this.groups = await this.sound.getGroups();
-    this.load();
+  ngOnInit() {
+    this.route.queryParams.subscribe(async (params) => {
+      this.groups = await this.sound.getGroups();
+      this.filter.groups = (params.group_id || '')
+        .split(',')
+        .filter((g) => !!g)
+        .map(g => +g)
+      ;
 
+      this.filter.onlySpeech = !!+params.only_speech;
+      this.filter.onlyDoubtful = !!+params.only_doubtful;
+      this.filter.onlyEmpty = !!+params.only_empty;
+      this.filter.text = params.text;
+
+      await this.load();
+    });
   }
 
   public async load(page: number = this.page) {
@@ -107,5 +122,17 @@ export class SoundsComponent implements OnInit {
       sound,
     });
     sound.saving = false;
+  }
+
+  public search() {
+    this.router.navigate(['/sounds'], {
+      queryParams: {
+        only_speech: +this.filter.onlySpeech,
+        only_doubtful: +this.filter.onlyDoubtful,
+        only_empty: +this.filter.onlyEmpty,
+        text: this.filter.text,
+        group_id: this.filter.groups.filter((i) => i !== 0).join(','),
+      }
+    });
   }
 }
