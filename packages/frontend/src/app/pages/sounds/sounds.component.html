@@ -99,7 +99,7 @@
           {{ sound.id}}
         </td>
         <td>
-          <textarea nz-input [(ngModel)]="sound.original_text"></textarea>
+          <textarea nz-input [(ngModel)]="sound.original_text" (ngModelChange)="sound.changed = true"></textarea>
         </td>
         <td>{{sound.behavior}}</td>
         <td>{{sound.lang}}</td>
@@ -114,9 +114,10 @@
         <td>{{sound.gender}}</td>
         <td>
           <nz-spin [nzSpinning]="sound.saving">
-            <a nz-button nzType="primary" (click)="save(sound)">
+            <button nz-button nzType="primary" (click)="save(sound)"
+                    [disabled]="!sound.changed || sound.original_text === ''">
               Suggest
-            </a>
+            </button>
           </nz-spin>
         </td>
         <td>
