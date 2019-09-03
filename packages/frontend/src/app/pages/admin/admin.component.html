@@ -1,0 +1,79 @@
+<nz-row>
+  <nz-col>
+    <div class="operate">
+      <button
+        nz-button
+        [disabled]="numberOfChecked === 0"
+        [nzType]="'primary'"
+        [nzLoading]="isOperating"
+        (click)="operateData()"
+      >
+        Accept
+      </button>
+      <nz-divider nzType="vertical"></nz-divider>
+      <button
+        nz-button
+        [disabled]="numberOfChecked === 0"
+        [nzType]="'primary'"
+        [nzLoading]="isOperating"
+        (click)="operateData()"
+      >
+        Decline
+      </button>
+      <span *ngIf="numberOfChecked">Selected {{ numberOfChecked }} items</span>
+    </div>
+    <nz-table
+      class="sounds-table"
+      #rowSelectionTable
+      nzShowPagination
+      nzPaginationPosition="both"
+      [nzData]="listOfAllData"
+      (nzCurrentPageDataChange)="currentPageDataChange($event)"
+    >
+      <thead>
+      <tr>
+        <th
+          nzShowCheckbox
+          [(nzChecked)]="isAllDisplayDataChecked"
+          [nzIndeterminate]="isIndeterminate"
+          (nzCheckedChange)="checkAll($event)"
+        ></th>
+        <th>#</th>
+        <th>Current Text</th>
+        <th>Suggested Text</th>
+        <th>Current Translation</th>
+        <th>Suggested Translation</th>
+        <th>Group Name</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of rowSelectionTable.data" (click)="play(data, $event)" [class.playing]="data.sound.playing">
+        <td
+          nzShowCheckbox
+          [(nzChecked)]="mapOfCheckedId[data.id]"
+          [nzDisabled]="data.disabled"
+          (nzCheckedChange)="refreshStatus()"
+        ></td>
+        <td>{{ data.sound_id }}</td>
+        <td>{{ data.sound.original_text }}</td>
+        <td>{{ data.original_text }}</td>
+        <td>{{ data.sound.translation }}</td>
+        <td>{{ data.translation }}</td>
+        <td>{{ data.group?.title }}</td>
+        <td>
+          <button nz-button nzType="primary" (click)="accept(data)">
+            Accept
+          </button>
+          <nz-divider nzType="vertical"></nz-divider>
+          <button nz-button nzType="primary" (click)="decline(data)">
+            Decline
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </nz-table>
+  </nz-col>
+</nz-row>
+
+<audio #audio></audio>

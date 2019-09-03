@@ -49,6 +49,7 @@
               [nzTotal]="total">
       <thead>
       <tr>
+        <th>#</th>
         <th>Original Text</th>
         <th>Behavior</th>
         <th>Lang</th>
@@ -62,6 +63,9 @@
       </thead>
       <tbody>
       <tr *ngFor="let sound of basicTable.data" (click)="play(sound, $event)" [class.playing]="sound.playing">
+        <td>
+          {{ sound.id}}
+        </td>
         <td>
           <textarea nz-input [(ngModel)]="sound.original_text"></textarea>
         </td>
@@ -77,7 +81,11 @@
         <td>{{sound.is_speech ? 'Yes' : 'No'}}</td>
         <td>{{sound.gender}}</td>
         <td>
-          <a nz-button nzType="primary">Save</a>
+          <nz-spin [nzSpinning]="sound.saving">
+            <a nz-button nzType="primary" (click)="save(sound)">
+              Suggest
+            </a>
+          </nz-spin>
         </td>
       </tr>
       </tbody>

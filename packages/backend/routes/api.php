@@ -20,3 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/sound', 'Api\\SoundController@paginate');
 Route::get('/sound/groups', 'Api\\SoundController@groups');
 Route::get('/stats/all', 'Api\\StatController@all');
+Route::get('/correction', 'Api\\CorrectionController@paginate');
+Route::post('/correction/add/{id}', 'Api\\CorrectionController@add');
+Route::post('/correction/accept/{id}', 'Api\\CorrectionController@accept');
+Route::post('/correction/decline/{id}', 'Api\\CorrectionController@decline');

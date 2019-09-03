@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * App\Models\Correction
@@ -30,4 +31,10 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Correction extends Model
 {
+    use SoftDeletes;
+
+    public function sound()
+    {
+        return $this->belongsTo(Sound::class, 'sound_id');
+    }
 }

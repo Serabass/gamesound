@@ -2,9 +2,10 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {SoundService} from '../../services/sound.service';
 import {NzModalService} from 'ng-zorro-antd';
 import {GroupInfoModalComponent} from '../../modals/group-info-modal/group-info-modal.component';
+import {CorrectionService} from '../../services/correction.service';
 
 export interface Sound {
-
+  id: number;
 }
 
 @Component({
@@ -36,7 +37,9 @@ export class SoundsComponent implements OnInit {
   @ViewChild('audio', {static: true})
   public audio: ElementRef<HTMLAudioElement>;
 
-  constructor(public sound: SoundService, public modal: NzModalService) {
+  constructor(public sound: SoundService,
+              public modal: NzModalService,
+              public correction: CorrectionService) {
   }
 
   async ngOnInit() {
@@ -95,5 +98,14 @@ export class SoundsComponent implements OnInit {
       },
       nzFooter: []
     });
+  }
+
+  public async save(sound) {
+    sound.saving = true;
+    await this.correction.add({
+      id: sound.id,
+      sound,
+    });
+    sound.saving = false;
   }
 }

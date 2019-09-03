@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\Correction;
 use App\Models\Group;
 use App\Models\Sound;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Validation\Rules\In;
 
 class SoundController extends Controller
 {
@@ -54,5 +56,9 @@ class SoundController extends Controller
         return cache()->remember('groups', 5, function () {
             return Group::all();
         });
+    }
+
+    public function correct()
+    {
     }
 }

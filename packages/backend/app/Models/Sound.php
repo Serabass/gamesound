@@ -40,8 +40,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Sound whereTranslationAccepted($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Sound whereUpdatedAt($value)
  * @mixin \Eloquent
- * @property string $group_name
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Sound whereGroupName($value)
+ * @property int|null $group_id
+ * @property-read \App\Models\Group|null $group
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Sound whereGroupId($value)
  */
 class Sound extends Model
 {
