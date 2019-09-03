@@ -1,0 +1,13 @@
+<nz-row *ngIf="isPedGroup">
+  <nz-col>
+    {{ group?.title }}
+
+    <nz-card>
+      <a [href]="imageUrl" target="_blank">
+        <img [src]="imageUrl" alt=""/>
+
+        {{ imageUrl }}
+      </a>
+    </nz-card>
+  </nz-col>
+</nz-row>

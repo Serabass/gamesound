@@ -15,15 +15,20 @@ import {GroupsComponent} from './pages/groups/groups.component';
 import {StatsComponent} from './pages/stats/stats.component';
 import {RouterModule} from '@angular/router';
 import {routes} from './app-routing.module';
+import {GroupInfoModalComponent} from './modals/group-info-modal/group-info-modal.component';
 
 registerLocaleData(ru);
 
 @NgModule({
+  entryComponents: [
+    GroupInfoModalComponent
+  ],
   declarations: [
     AppComponent,
     SoundsComponent,
     GroupsComponent,
-    StatsComponent
+    StatsComponent,
+    GroupInfoModalComponent
   ],
   imports: [
     BrowserModule,

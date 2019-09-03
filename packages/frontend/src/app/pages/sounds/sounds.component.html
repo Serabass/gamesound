@@ -8,8 +8,11 @@
                style="width: 100%;"
                nzPlaceHolder="Group"
                [(ngModel)]="filter.groups">
-      <nz-option *ngFor="let option of groups" [nzLabel]="option" [nzValue]="option"></nz-option>
+      <nz-option *ngFor="let option of groups" [nzLabel]="option.title" [nzValue]="option.id"></nz-option>
     </nz-select>
+    <a href="https://gtaforums.com/topic/868526-ped-ids-structure" target="_blank">
+      Understanding group names
+    </a>
   </nz-col>
   <nz-col [nzMd]="2" [nzOffset]="1">
     <label nz-checkbox [(ngModel)]="filter.onlySpeech">
@@ -65,7 +68,11 @@
         <td>{{sound.lang}}</td>
         <td>{{sound.translation}}</td>
         <td>{{sound.translation_accepted}}</td>
-        <td>{{sound.group_name}}</td>
+        <td>
+          <a (click)="showGroupInfo(sound.group, $event)">
+            {{sound.group?.title}}
+          </a>
+        </td>
         <td>{{sound.is_speech}}</td>
         <td>{{sound.gender}}</td>
         <td>
