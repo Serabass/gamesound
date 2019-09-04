@@ -109,7 +109,7 @@
         <td>{{sound.translation}}</td>
         <td>{{sound.translation_accepted ? 'Yes' : 'No'}}</td>
         <td>
-          <a (click)="showGroupInfo(sound.group, $event)">
+          <a nz-button (click)="showGroupInfo(sound.group, $event)">
             {{sound.group?.title}}
           </a>
         </td>
