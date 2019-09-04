@@ -22,6 +22,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Group whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Group whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int|null $model_id
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Group whereModelId($value)
  */
 class Group extends Model
 {
