@@ -117,6 +117,7 @@ export class SoundsComponent implements OnInit {
 
     const modal = this.modal.create({
       nzContent: GroupInfoModalComponent,
+      nzWidth: 900,
       nzComponentParams: {
         group
       },

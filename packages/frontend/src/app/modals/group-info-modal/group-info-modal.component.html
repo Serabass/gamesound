@@ -1,13 +1,24 @@
 <nz-row *ngIf="isPedGroup">
-  <nz-col>
+  <h1>
     {{ group?.title }}
-
-    <nz-card>
+  </h1>
+</nz-row>
+<nz-row *ngIf="isPedGroup">
+  <nz-col [nzMd]="12">
+    <nz-card [nzBordered]="false">
       <a [href]="imageUrl" target="_blank">
         <img [src]="imageUrl" alt=""/>
 
         {{ imageUrl }}
       </a>
+    </nz-card>
+  </nz-col>
+  <nz-col [nzMd]="12">
+    <nz-card *ngIf="info" [nzBordered]="false">
+      <p>Race: <b>{{ info.race }}</b></p>
+      <p>Gender: <b>{{ info.gender }}</b></p>
+      <p>Age: <b>{{ info.age }}</b></p>
+      <p>Type: <b>{{ info.type }}</b></p>
     </nz-card>
   </nz-col>
 </nz-row>
