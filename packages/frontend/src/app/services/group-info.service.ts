@@ -5,6 +5,8 @@ import {Injectable} from '@angular/core';
 })
 export class GroupInfoService {
 
+  private rgx = /^\s*(\d+)\s+(\w+)/;
+
   private groupNameRgx = /^([HBWJ])([FM])([OY])(ST|RI|BE|BU|MD|CG|PR|TR|PI|BB|CR|AP|CA|DK|CW|GO|LG|JG|SK|SH|TO)$/;
 
   constructor() {
@@ -51,71 +53,87 @@ export class GroupInfoService {
 
     switch (type) {
       case 'TO':
-        res.type = 'Tourist';
+        res.type = 'TOurist';
         break;
       case 'BE':
-        res.type = 'Beach';
+        res.type = 'BEach';
         break;
       case 'PR':
-        res.type = 'Prostitute';
+        res.type = 'PRostitute';
         break;
       case 'RI':
-        res.type = 'Rich';
+        res.type = 'RIch';
         break;
       case 'GO':
-        res.type = 'Golf';
+        res.type = 'GOlf';
         break;
       case 'BU':
-        res.type = 'Business';
+        res.type = 'BUsiness';
         break;
       case 'SH':
-        res.type = 'Shopper';
+        res.type = 'SHopper';
         break;
       case 'TR':
-        res.type = 'Tramp';
+        res.type = 'TRamp';
         break;
       case 'MD':
-        res.type = 'Maid';
+        res.type = 'MaiD';
         break;
       case 'CG':
-        res.type = 'Cigar';
+        res.type = 'CiGar';
         break;
       case 'AP':
-        res.type = 'Airport';
+        res.type = 'AirPort';
         break;
       case 'CA':
-        res.type = 'Cab driver';
+        res.type = 'CAb driver';
         break;
       case 'DK':
-        res.type = 'Dock worker';
+        res.type = 'DocK worker';
         break;
       case 'CR':
-        res.type = 'Criminal';
+        res.type = 'CRiminal';
         break;
       case 'PI':
-        res.type = 'Pimp';
+        res.type = 'PImp';
         break;
       case 'BB':
-        res.type = 'Beatboxer';
+        res.type = 'BeatBoxer';
         break;
       case 'ST':
-        res.type = 'Street';
+        res.type = 'STreet';
         break;
       case 'CW':
         res.type = 'Construction Worker';
         break;
       case 'LG':
-        res.type = 'Lifeguard';
+        res.type = 'LifeGuard';
         break;
       case 'JG':
-        res.type = 'Jogging';
+        res.type = 'JoGging';
         break;
       case 'SK':
-        res.type = 'Skate roller';
+        res.type = 'SKate roller';
         break;
     }
 
     return res;
   }
 
+  public isPedGroup(group) {
+
+    let parts = group.split(/\s*,\s*/);
+
+    return parts[0].split(/s*\/\s*/).some((e) => this.rgx.test(e));
+  }
+
+  public getImageURL(group) {
+    if (this.isPedGroup) {
+      let [, id, title] = group.match(this.rgx);
+
+      id = id.replace(/^0+/, '');
+
+      return `http://spaceeinstein.altervista.org/vcped/${id}.jpg`;
+    }
+  }
 }

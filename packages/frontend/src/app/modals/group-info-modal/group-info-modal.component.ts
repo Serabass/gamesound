@@ -24,18 +24,10 @@ export class GroupInfoModalComponent implements OnInit {
   }
 
   public get isPedGroup() {
-    let parts = this.group.title.split(/\s*,\s*/);
-
-    return parts[0].split(/s*\/\s*/).some((e) => this.rgx.test(e));
+    return this.groupInfoService.isPedGroup(this.group.title);
   }
 
   public get imageUrl() {
-    if (this.isPedGroup) {
-      let [, id, title] = this.group.title.match(this.rgx);
-
-      id = id.replace(/^0+/, '');
-
-      return `http://spaceeinstein.altervista.org/vcped/${id}.jpg`;
-    }
+    return this.groupInfoService.getImageURL(this.group.title);
   }
 }
