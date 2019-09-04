@@ -28,6 +28,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Correction whereTranslation($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Correction whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \App\Models\Sound $sound
+ * @method static bool|null forceDelete()
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Correction onlyTrashed()
+ * @method static bool|null restore()
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Correction withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Correction withoutTrashed()
  */
 class Correction extends Model
 {

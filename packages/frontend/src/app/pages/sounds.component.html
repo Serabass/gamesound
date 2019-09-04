@@ -87,6 +87,7 @@
         <th>Group Name</th>
         <th>Is speech</th>
         <th>Gender</th>
+        <th>Rate</th>
         <th></th>
         <th></th>
       </tr>
@@ -99,7 +100,9 @@
           {{ sound.id}}
         </td>
         <td>
-          <textarea nz-input [(ngModel)]="sound.original_text" (ngModelChange)="sound.changed = true"></textarea>
+          <textarea nz-input
+                    [(ngModel)]="sound.original_text"
+                    (ngModelChange)="sound.changed = true"></textarea>
         </td>
         <td>{{sound.behavior}}</td>
         <td>{{sound.lang}}</td>
@@ -113,6 +116,16 @@
         <td>{{sound.is_speech ? 'Yes' : 'No'}}</td>
         <td>{{sound.gender}}</td>
         <td>
+            <span nz-popover nzTitle="Rate this row!"
+                  [nzContent]="rateTpl"
+                  nzPlacement="rightTop">
+              {{ sound.rate }}
+            </span>
+          <ng-template #rateTpl>
+            <nz-rate [nzCount]="5" (ratechange)="rate(sound, $event)"></nz-rate>
+          </ng-template>
+        </td>
+        <td>
           <nz-spin [nzSpinning]="sound.saving">
             <button nz-button nzType="primary" (click)="save(sound)"
                     [disabled]="!sound.changed || sound.original_text === ''">
@@ -122,11 +135,11 @@
         </td>
         <td>
           <button nz-button nz-popover
-                  [nzContent]="contentTemplate"
+                  [nzContent]="commentsTpl"
                   nzPlacement="left">
             <i nz-icon nzType="down-circle" nzTheme="outline"></i>
           </button>
-          <ng-template #contentTemplate>
+          <ng-template #commentsTpl>
             <nz-list
               [nzDataSource]="sound.comments"
               nzBordered

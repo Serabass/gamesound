@@ -44,6 +44,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property int|null $group_id
  * @property-read \App\Models\Group|null $group
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Sound whereGroupId($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Comment[] $comments
+ * @property-read mixed $rate
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\SoundRate[] $rates
  */
 class Sound extends Model
 {
@@ -51,6 +54,10 @@ class Sound extends Model
         'is_speech' => 'boolean',
         'recorded' => 'boolean',
         'translation_accepted' => 'boolean',
+    ];
+
+    public $appends = [
+        'rate'
     ];
 
     public function group()
@@ -61,5 +68,15 @@ class Sound extends Model
     public function comments()
     {
         return $this->hasMany(Comment::class, 'sound_id');
+    }
+
+    public function rates()
+    {
+        return $this->hasMany(SoundRate::class);
+    }
+
+    public function getRateAttribute()
+    {
+        return $this->rates->avg('rate') ?? 0;
     }
 }

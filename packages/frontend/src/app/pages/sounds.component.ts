@@ -155,4 +155,8 @@ export class SoundsComponent implements OnInit {
   public saveVolume() {
     localStorage.setItem('volume', this.volume.toString());
   }
+
+  public rate(sound, event) {
+    debugger;
+  }
 }
