@@ -40,7 +40,7 @@
     "karma-jasmine": "^2.0.1",
     "karma-jasmine-html-reporter": "^1.4.2",
     "lodash": "^4.17.11",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "ng-zorro-antd": "^7.5.0",
     "ngx-cookie-service": "^2.2.0",
     "ngx-qrcode3": "^0.3.0",
